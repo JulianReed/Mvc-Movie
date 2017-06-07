@@ -15,8 +15,64 @@ namespace MvcMovie.Controllers
         private MvcMovieContext db = new MvcMovieContext();
 
         // GET: Movies
-        public ActionResult Index(string movieGenre, string searchString, string directorString)
+
+
+        //public ActionResult Index(string sortOrder)
+        //{
+        //    ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "iRating_desc" : "";
+        //    ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+        //    var movies = from s in db.Movies
+        //                   select s;
+        //    switch (sortOrder)
+        //    {
+        //        case "iRating_desc":
+        //            movies = movies.OrderByDescending(s => s.iRating);
+        //            break;
+        //    }
+        //    return View(movies.ToList());
+        //}
+
+
+
+        //public ViewResult Index(string sortOrder, string searchString)
+        //{
+        //    ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+        //    ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+        //    var students = from s in db.Students
+        //                   select s;
+        //    if (!String.IsNullOrEmpty(searchString))
+        //    {
+        //        students = students.Where(s => s.LastName.Contains(searchString)
+        //                               || s.FirstMidName.Contains(searchString));
+        //    }
+        //    switch (sortOrder)
+        //    {
+        //        case "name_desc":
+        //            students = students.OrderByDescending(s => s.LastName);
+        //            break;
+        //        case "Date":
+        //            students = students.OrderBy(s => s.EnrollmentDate);
+        //            break;
+        //        case "date_desc":
+        //            students = students.OrderByDescending(s => s.EnrollmentDate);
+        //            break;
+        //        default:
+        //            students = students.OrderBy(s => s.LastName);
+        //            break;
+        //    }
+
+        //    return View(students.ToList());
+        //}
+
+
+
+
+        public ActionResult Index(string movieGenre, string searchString, string directorString, string sortOrder)
         {
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "iRating_desc" : "";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+
+
             var GenreLst = new List<string>();
 
             var GenreQry = from d in db.Movies
@@ -44,6 +100,10 @@ namespace MvcMovie.Controllers
                 movies = movies.Where(x => x.Director.Contains(directorString));
             }
 
+
+            movies = movies.OrderByDescending(s => s.iRating);
+
+            //return View(movies.ToList());
             return View(movies);
         }
 
@@ -73,7 +133,7 @@ namespace MvcMovie.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Title,ReleaseDate,Genre,Price,Rating,Director")] Movie movie)
+        public ActionResult Create([Bind(Include = "ID,Title,ReleaseDate,Genre,Price,Rating,Director,iRating")] Movie movie)
         {
             if (ModelState.IsValid)
             {
@@ -105,7 +165,7 @@ namespace MvcMovie.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Title,ReleaseDate,Genre,Price,Rating,Director")] Movie movie)
+        public ActionResult Edit([Bind(Include = "ID,Title,ReleaseDate,Genre,Price,Rating,Director,iRating")] Movie movie)
         {
             if (ModelState.IsValid)
             {

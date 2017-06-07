@@ -218,6 +218,14 @@
     <Compile Include="Migrations\201706071814354_Director.Designer.cs">
       <DependentUpon>201706071814354_Director.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706071854530_iRating.cs" />
+    <Compile Include="Migrations\201706071854530_iRating.Designer.cs">
+      <DependentUpon>201706071854530_iRating.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706072327109_DataAnnotation.cs" />
+    <Compile Include="Migrations\201706072327109_DataAnnotation.Designer.cs">
+      <DependentUpon>201706072327109_DataAnnotation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -327,6 +335,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706071814354_Director.resx">
       <DependentUpon>201706071814354_Director.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706071854530_iRating.resx">
+      <DependentUpon>201706071854530_iRating.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706072327109_DataAnnotation.resx">
+      <DependentUpon>201706072327109_DataAnnotation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

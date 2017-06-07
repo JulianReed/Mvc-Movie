@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Details";
 }
-
+<script src="https://use.fontawesome.com/d40027ea8c.js"></script>
 <h2>Details</h2>
 
 <div>
@@ -58,7 +58,25 @@
             @Html.DisplayFor(model => model.Director)
         </dd>
 
+        <dt>
+            IMDB Rating
+            @*@Html.DisplayNameFor(model => model.iRating)*@
+        </dt>
 
+        <dd>
+            @{
+                //this was sketchy. I don't know why Model had to be uppercase--I got an error every time I 
+                //tried to get model.iRating in this @ block
+                var numStars = (int)Model.iRating;
+                System.Diagnostics.Debug.WriteLine("numStars = " + numStars);
+                for (int i = 1; i <= numStars; i++)
+                {
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                }
+            }
+            
+            @*@Html.DisplayFor(model => model.iRating)*@
+        </dd>
 
     </dl>
 </div>

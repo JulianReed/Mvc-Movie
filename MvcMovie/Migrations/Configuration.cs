@@ -24,7 +24,8 @@ namespace MvcMovie.Migrations
                     Genre = "Romantic Comedy",
                     Rating = "PG",
                     Price = 7.99M,
-                    Director = "Quentin Tarantino"
+                    Director = "Quentin Tarantino",
+                    iRating = 4.2
                 },
 
                  new Movie
@@ -34,7 +35,8 @@ namespace MvcMovie.Migrations
                      Genre = "Comedy",
                      Rating = "PG",
                      Price = 8.99M,
-                     Director = "David Lynch"
+                     Director = "David Lynch",
+                     iRating = 8.7
                  },
 
                  new Movie
@@ -44,7 +46,8 @@ namespace MvcMovie.Migrations
                      Genre = "Comedy",
                      Rating = "R",
                      Price = 9.99M,
-                     Director = "David Lynch"
+                     Director = "David Lynch",
+                     iRating = 1.4
                  },
 
                new Movie
@@ -54,7 +57,8 @@ namespace MvcMovie.Migrations
                    Genre = "Western",
                    Price = 12.99M,
                    Rating = "G",
-                   Director = "Michael Bay"
+                   Director = "Michael Bay",
+                   iRating = 9.9
 
                }
            );
