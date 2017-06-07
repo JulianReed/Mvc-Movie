@@ -15,7 +15,7 @@ namespace MvcMovie.Controllers
         private MvcMovieContext db = new MvcMovieContext();
 
         // GET: Movies
-        public ActionResult Index(string movieGenre, string searchString)
+        public ActionResult Index(string movieGenre, string searchString, string directorString)
         {
             var GenreLst = new List<string>();
 
@@ -37,6 +37,11 @@ namespace MvcMovie.Controllers
             if (!string.IsNullOrEmpty(movieGenre))
             {
                 movies = movies.Where(x => x.Genre == movieGenre);
+            }
+
+            if (!string.IsNullOrEmpty(directorString))
+            {
+                movies = movies.Where(x => x.Director.Contains(directorString));
             }
 
             return View(movies);
@@ -68,7 +73,7 @@ namespace MvcMovie.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
+        public ActionResult Create([Bind(Include = "ID,Title,ReleaseDate,Genre,Price,Rating,Director")] Movie movie)
         {
             if (ModelState.IsValid)
             {
