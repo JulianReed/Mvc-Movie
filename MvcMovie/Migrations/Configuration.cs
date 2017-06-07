@@ -22,7 +22,9 @@ namespace MvcMovie.Migrations
                     Title = "When Harry Met Sally",
                     ReleaseDate = DateTime.Parse("1989-1-11"),
                     Genre = "Romantic Comedy",
-                    Price = 7.99M
+                    Rating = "PG",
+                    Price = 7.99M,
+                    Director = "Quentin Tarantino"
                 },
 
                  new Movie
@@ -30,7 +32,9 @@ namespace MvcMovie.Migrations
                      Title = "Ghostbusters ",
                      ReleaseDate = DateTime.Parse("1984-3-13"),
                      Genre = "Comedy",
-                     Price = 8.99M
+                     Rating = "PG",
+                     Price = 8.99M,
+                     Director = "David Lynch"
                  },
 
                  new Movie
@@ -38,7 +42,9 @@ namespace MvcMovie.Migrations
                      Title = "Ghostbusters 2",
                      ReleaseDate = DateTime.Parse("1986-2-23"),
                      Genre = "Comedy",
-                     Price = 9.99M
+                     Rating = "R",
+                     Price = 9.99M,
+                     Director = "David Lynch"
                  },
 
                new Movie
@@ -46,7 +52,10 @@ namespace MvcMovie.Migrations
                    Title = "Rio Bravo",
                    ReleaseDate = DateTime.Parse("1959-4-15"),
                    Genre = "Western",
-                   Price = 3.99M
+                   Price = 12.99M,
+                   Rating = "G",
+                   Director = "Michael Bay"
+
                }
            );
 

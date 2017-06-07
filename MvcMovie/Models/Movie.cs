@@ -22,6 +22,13 @@ namespace MvcMovie.Models
         public string Genre { get; set; }
         public decimal Price { get; set; }
         public string Rating { get; set; }
+        public string Director { get; set; }
 
     }
+
+    public class MvcMovieContext : DbContext
+    {
+        public DbSet<Movie> Movies { get; set; }
+    }
+
 }
