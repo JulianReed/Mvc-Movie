@@ -37,8 +37,11 @@
             </th>
             <th>
                 IMDB Rating
-
                 @*@Html.DisplayNameFor(model => model.iRating)*@
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.PosterURL)*@
+                Poster
             </th>
 
             <th></th>
@@ -48,8 +51,6 @@
 
         @foreach (var item in Model)
         {
-            
-            
 
         }
 
@@ -76,6 +77,32 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.iRating)
+                </td>
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.PosterURL)*@
+                    @{
+                        var plusTitle = item.Title.Replace(" ", "+");
+                        var webRequest = WebRequest.Create(@"https://api.themoviedb.org/3/search/movie?api_key=efd3636a73f29caea4f872a3b84518f8&query="+plusTitle);
+
+                        var response = webRequest.GetResponse();
+                        var content = response.GetResponseStream();
+                        var reader = new StreamReader(content);
+
+                        var strContent = reader.ReadToEnd();
+                        //System.Diagnostics.Debug.WriteLine("Here's the file: " + strContent);
+                        var jpgIndex = strContent.IndexOf(".jpg");
+                        var posterPath = strContent.Substring(jpgIndex - 27, 27);
+
+                        System.Diagnostics.Debug.WriteLine("Here's the string: " + posterPath);
+                        var imageStr = "https://image.tmdb.org/t/p/w500/" + posterPath + ".jpg";
+                        <img src="@imageStr" alt="@item.Title" height="70" width="70">
+
+
+                    }
+                    
+
+                    @*<img src="@item.PosterURL" alt="Smiley face" height="70" width="70">*@
+
                 </td>
 
                 <td>

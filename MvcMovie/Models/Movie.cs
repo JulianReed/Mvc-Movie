@@ -38,6 +38,7 @@ namespace MvcMovie.Models
         [Range(0, 10)]
         public double iRating { get; set; }
 
+        public string PosterURL { get; set; }
 
     }
 

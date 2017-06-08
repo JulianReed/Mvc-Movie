@@ -65,7 +65,7 @@
 
         <dd>
             @{
-                //this was sketchy. I don't know why Model had to be uppercase--I got an error every time I 
+                //this was sketchy. I don't know why Model had to be uppercase--I got an error every time I
                 //tried to get model.iRating in this @ block
                 var numStars = (int)Model.iRating;
                 //System.Diagnostics.Debug.WriteLine("numStars = " + numStars);
@@ -74,9 +74,38 @@
                     <i class="fa fa-star" aria-hidden="true"></i>
                 }
             }
-            
-            @*@Html.DisplayFor(model => model.iRating)*@
+
+        <dt>
+            Poster
+            @*@Html.DisplayNameFor(model => model.PosterURL)*@
+        </dt>
+
+        <dd>
+            @*@Html.DisplayFor(model => model.PosterURL)*@
+            @*<img src="@Model.PosterURL" alt="Smiley face" height="100" width="100">
+            <img src="@imageStr" alt="Smiley face" height="100" width="100">*@
+
+            @{ 
+                var plusTitle = Model.Title.Replace(" ", "+");
+                var webRequest = WebRequest.Create(@"https://api.themoviedb.org/3/search/movie?api_key=efd3636a73f29caea4f872a3b84518f8&query=" + plusTitle);
+
+                var response = webRequest.GetResponse();
+                var content = response.GetResponseStream();
+                var reader = new StreamReader(content);
+
+                var strContent = reader.ReadToEnd();
+                //System.Diagnostics.Debug.WriteLine("Here's the file: " + strContent);
+                var jpgIndex = strContent.IndexOf(".jpg");
+                var posterPath = strContent.Substring(jpgIndex - 27, 27);
+
+                System.Diagnostics.Debug.WriteLine("Here's the string: " + posterPath);
+                var imageStr = "https://image.tmdb.org/t/p/w500/" + posterPath + ".jpg";
+                <img src="@imageStr" alt="@Model.Title">
+                }
+
         </dd>
+            
+
 
     </dl>
 </div>
