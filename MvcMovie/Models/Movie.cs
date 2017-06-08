@@ -34,6 +34,8 @@ namespace MvcMovie.Models
         [StringLength(5)]
         public string Rating { get; set; }
         public string Director { get; set; }
+
+        [Range(0, 10)]
         public double iRating { get; set; }
 
 

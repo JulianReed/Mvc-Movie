@@ -13,7 +13,7 @@ namespace MvcMovie.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201706071854530_iRating"; }
+            get { return "201706081512575_iRating"; }
         }
         
         string IMigrationMetadata.Source
