@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<MvcMovie.Models.Movie>
+@using MvcMovie.Controllers
 @{
     ViewBag.Title = "Index";
 }
@@ -80,29 +81,41 @@
                 </td>
                 <td>
                     @*@Html.DisplayFor(modelItem => item.PosterURL)*@
-                    @{
+                    @*@{
                         var plusTitle = item.Title.Replace(" ", "+");
                         var webRequest = WebRequest.Create(@"https://api.themoviedb.org/3/search/movie?api_key=efd3636a73f29caea4f872a3b84518f8&query="+plusTitle);
 
                         var response = webRequest.GetResponse();
+                        System.Diagnostics.Debug.WriteLine(response);
                         var content = response.GetResponseStream();
                         var reader = new StreamReader(content);
+
+                        //make this better w/ json file
 
                         var strContent = reader.ReadToEnd();
                         //System.Diagnostics.Debug.WriteLine("Here's the file: " + strContent);
                         var jpgIndex = strContent.IndexOf(".jpg");
                         var posterPath = strContent.Substring(jpgIndex - 27, 27);
 
-                        System.Diagnostics.Debug.WriteLine("Here's the string: " + posterPath);
+                        //System.Diagnostics.Debug.WriteLine("Here's the string: " + posterPath);
                         var imageStr = "https://image.tmdb.org/t/p/w500/" + posterPath + ".jpg";
                         <img src="@imageStr" alt="@item.Title" height="70" width="70">
+
+
+
+
 
                         //using System.Net;
                         //...
                         //WebClient Client = new WebClient();
                         //Client.DownloadFile("@imageStr", @"\App_Data\Posters\@plusTitle.png");
 
+                    }*@
+                    @{ 
 
+                        var controller = new MvcMovie.Controllers.MoviesController();
+                        var imageString = controller.getPosterURL(item.ID);
+                        <img src="@imageString" alt="@item.Title" height="70" width="70">
                     }
                     
 

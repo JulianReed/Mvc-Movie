@@ -234,6 +234,10 @@
     <Compile Include="Migrations\201706081811110_iRating2.Designer.cs">
       <DependentUpon>201706081811110_iRating2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706092318590_Dunno.cs" />
+    <Compile Include="Migrations\201706092318590_Dunno.Designer.cs">
+      <DependentUpon>201706092318590_Dunno.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -355,6 +359,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706081811110_iRating2.resx">
       <DependentUpon>201706081811110_iRating2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706092318590_Dunno.resx">
+      <DependentUpon>201706092318590_Dunno.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

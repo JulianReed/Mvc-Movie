@@ -7,10 +7,10 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Movie</h4>
         <hr />
@@ -65,11 +65,31 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.iRating, new { @class = "control-label col-md-2" })
+            
             <div class="col-md-10">
                 @Html.EditorFor(model => model.iRating, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.iRating, "", new { @class = "text-danger" })
             </div>
         </div>
+
+        <!--This block was added to the functional code-->
+
+        @*@{ 
+            HttpWebRequest httpWebRequest = (HttpWebRequest)HttpWebRequest.Create("https://image.tmdb.org/t/p/w500/b8cCEKv4q8iIatnfFO8dDDwxws1.jpg");
+
+            HttpWebResponse httpWebReponse = (HttpWebResponse)httpWebRequest.GetResponse();
+
+            Stream stream = httpWebReponse.GetResponseStream();
+            using (var fileStream = new FileStream(destPath, FileMode.Create, FileAccess.Write))
+            {
+                stream.CopyTo(fileStream);
+            }
+
+
+        }*@
+
+
+
 
         <div class="form-group">
             @Html.LabelFor(model => model.PosterURL, new { @class = "control-label col-md-2" })
@@ -86,7 +106,7 @@
             </div>
         </div>
     </div>
-}
+            }
 
 <div>
     @Html.ActionLink("Back to List", "Index")

@@ -7,6 +7,9 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MvcMovie.Models;
+using System.IO;
+using Newtonsoft.Json;
+
 
 namespace MvcMovie.Controllers
 {
@@ -202,6 +205,37 @@ namespace MvcMovie.Controllers
             return RedirectToAction("Index");
         }
 
+        public string getPosterURL(int? id)
+        {
+            Movie movie = db.Movies.Find(id);
+            var plusTitle = movie.Title.Replace(" ", "+");
+            System.Diagnostics.Debug.WriteLine(plusTitle);
+            //var webRequest = WebRequest.Create(@"https://api.themoviedb.org/3/search/movie?api_key=efd3636a73f29caea4f872a3b84518f8&query=" + plusTitle);
+            //var response = webRequest.GetResponse();
+            //System.Diagnostics.Debug.WriteLine(response);
+            //var content = response.GetResponseStream();
+            //var reader = new StreamReader(content);
+
+            var json = new WebClient().DownloadString("https://api.themoviedb.org/3/search/movie?api_key=efd3636a73f29caea4f872a3b84518f8&query="+plusTitle);
+            //List<Item> items = JsonConvert.DeserializeObject<List<Item>>(json);
+            RootObject parsedJson = JsonConvert.DeserializeObject<RootObject>(json);
+            System.Diagnostics.Debug.WriteLine("total results: " + parsedJson.total_results);
+            var imageString = "https://image.tmdb.org/t/p/w500" + parsedJson.results[0].poster_path;
+
+
+
+            //make this better w/ json file
+
+            //var strContent = reader.ReadToEnd();
+            //System.Diagnostics.Debug.WriteLine("Here's the file: " + strContent);
+            //var jpgIndex = strContent.IndexOf(".jpg");
+            //var posterPath = strContent.Substring(jpgIndex - 27, 27);
+
+            //System.Diagnostics.Debug.WriteLine("Here's the string: " + posterPath);
+            //var imageStr = "https://image.tmdb.org/t/p/w500/" + posterPath + ".jpg";
+            return imageString;
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -210,5 +244,31 @@ namespace MvcMovie.Controllers
             }
             base.Dispose(disposing);
         }
+    }
+
+    public class Result
+    {
+        public int vote_count { get; set; }
+        public int id { get; set; }
+        public bool video { get; set; }
+        public double vote_average { get; set; }
+        public string title { get; set; }
+        public double popularity { get; set; }
+        public string poster_path { get; set; }
+        public string original_language { get; set; }
+        public string original_title { get; set; }
+        public List<object> genre_ids { get; set; }
+        public string backdrop_path { get; set; }
+        public bool adult { get; set; }
+        public string overview { get; set; }
+        public string release_date { get; set; }
+    }
+
+    public class RootObject
+    {
+        public int page { get; set; }
+        public int total_results { get; set; }
+        public int total_pages { get; set; }
+        public List<Result> results { get; set; }
     }
 }
